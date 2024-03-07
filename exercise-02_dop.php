@@ -4,11 +4,17 @@ declare(strict_types = 1);
 $MonthNames=["Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"];
 $weekDaysNames=["Пн","Вт","Ср","Чт","Пт","Сб","Вс"];
 
-
-$year = 2024;
-$month = 2;
-$monthsToCount = 3;
-$firstDay = 1;
+if ($argc>1){
+    for($i=1;$i<count($argv);$i++){
+        if(!is_numeric($argv[$i]) || intval($argv[$i]) <= 0){
+            die("Все параметры должны быть положительными числами".PHP_EOL."По порядку: год месяц сколько_месяцев_смотреть первый_день_выхода".PHP_EOL.PHP_EOL);
+        }
+    }
+}
+$year = isset($argv[1])?intval($argv[1]) : intval(date('Y'));
+$month = isset($argv[2])?intval($argv[2]) : intval(date('m'));
+$monthsToCount = isset($argv[3])?intval($argv[3]) : 1;
+$firstDay = isset($argv[4])?intval($argv[4]) : 1;
 // Объявляем первый день трудоустройства
 
 $weekend = [6,7]; // Обязательные выходные (номера дней недели)
